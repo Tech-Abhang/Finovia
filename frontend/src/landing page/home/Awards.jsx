@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Awards = () => {
   return (
-    <div className="container mx-auto p-5">
+    <div className="container mx-auto p-5 pb-7">
       <div className="w-full flex">
         <div className="w-1/2 ">
           <img src="largestBroker.svg" />
@@ -43,7 +43,7 @@ export const Awards = () => {
             </div>
           </div>
 
-          <img src='pressLogos.png'/>
+          <img src='pressLogos.png' className=''/>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react'
-import Hero from '../home/Hero'
+import Hero from '../product/Hero'
+
 
 const ProductPage = () => {
   return (

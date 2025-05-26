@@ -1,7 +1,5 @@
-import React, { use } from 'react'   
-import { Link } from 'react-router-dom'
-import {useState} from 'react'
-import Dashboard from './Dashboard'
+import React, { useState } from 'react';  
+import { Link, Route, Routes } from 'react-router-dom'
 import Order from './Order'
 import Holding from './Holding'
 import Positions from './Positions'
@@ -15,30 +13,11 @@ const Menu = () => {
         setSelected(index);
     }
 
-    const [profileDropdown , setProfileDropdown] = useState(false);
+    const [profileDropdown, setProfileDropdown] = useState(false);
 
     const handleprofileDropdown = () => {
         setProfileDropdown(!profileDropdown);
     }
-
-    // Function to render the appropriate component based on selected index
-    const renderSelectedComponent = () => {
-        switch(selected) {
-            case 0:
-                return <div className='p-4'>Dashboard Content</div>;
-            case 1:
-                return <Order />;
-            case 2:
-                return <Holding />;
-            case 3:
-                return <Positions />;
-            case 4:
-                return <Funds />;
-            default:
-                return <div className='p-4'>Dashboard Content</div>;
-        }
-    }
-
 
   return (
     <div className='h-screen'>
@@ -56,13 +35,16 @@ const Menu = () => {
         </div>
         
         <div className='w-full py-3 h-7/8 text-center bg-gray-100'>
-            {renderSelectedComponent()}
+            <Routes>
+                <Route path="/" element={<div className='p-4'>Dashboard Content</div>} />
+                <Route path="/orders" element={<Order/>} />
+                <Route path="/holdings" element={<Holding/>} />
+                <Route path="/positions" element={<Positions/>} />
+                <Route path="/funds" element={<Funds/>} />
+            </Routes>
         </div>
-
     </div>
-
-
-  )
+  ) 
 }
 
 export default Menu

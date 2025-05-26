@@ -12,6 +12,7 @@ const Dashboard = () => {
             <Menu/>
         </div>
     </div>
+
   )
 }
 

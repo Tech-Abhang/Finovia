@@ -24,6 +24,10 @@ root.render(
         <Route path="/product" element={<ProductPage />} />
         <Route path="/support" element={<Support />} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/dashboard/orders" element={<Dashboard/>} />
+        <Route path="/dashboard/holdings" element={<Dashboard/>} />
+        <Route path="/dashboard/positions" element={<Dashboard/>} />
+        <Route path="/dashboard/funds" element={<Dashboard/>} />
         <Route path="*" element={<NotFound/>} />
       </Routes>
       <Footer />

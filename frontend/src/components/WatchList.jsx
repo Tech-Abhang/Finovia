@@ -1,6 +1,13 @@
 import React from 'react'
 import { watchList } from '../data/Data'
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../components/ui/ToolTip"
+
 const WatchList = () => {
   return (
     <div className="h-screen bg-gray-100 border-r">
@@ -44,6 +51,7 @@ const WatchList = () => {
                 </div>
             ))}
         </div>
+
     </div>
   )
 }
@@ -59,6 +67,22 @@ const WatchListItem = ({ stock }) => {
         setWatchlistActions(false);
     }
 
+    const WatchListActionTooltip = ({ uid }) => { 
+        return (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <div className="flex flex-row items-center">
+                  <button className='bg-blue-500 text-white p-2 mr-1 h-[36px] w-[56px] rounded-2xl'>Buy</button>
+                  <button className='bg-red-500 text-white p-2 ml-1 h-[36px] w-[56px] rounded-2xl'>Sell</button>
+                  <button className='bg-white p-2 ml-1 h-[36px] w-[56px] border rounded-2xl'>...</button>
+                </div>
+              </TooltipTrigger>
+            </Tooltip>
+          </TooltipProvider>
+        );
+    };
+
     return (
         <div onMouseEnter={mouseEntry} onMouseLeave={mouseLeave} className='flex justify-between w-full items-center'>
             <div className="flex items-center">
@@ -66,12 +90,20 @@ const WatchListItem = ({ stock }) => {
                     <p className="font-medium text-gray-800">{stock.name}</p>
                 </div> 
             </div>
-            <div className="flex flex-col items-end">
-                <span className="font-light text-gray-900">₹{stock.price}</span>
-                <span className={stock.isDown === "true" ? "text-red-500 text-sm" : "text-green-500 text-sm"}>
-                    {stock.isDown === "true" ? "▼" : "▲"} {stock.percent}%
-                </span>
+            
+
+            <div className='flex items-center justify-between '>
+                {WatchlistActions && <WatchListActionTooltip uid={stock.name} />}
+                <div className='pl-3 flex flex-col items-end'>
+                    <span className="font-light text-gray-900">₹{stock.price}</span>
+                    <span className={stock.isDown === "true" ? "text-red-500 text-sm" : "text-green-500 text-sm"}>
+                        {stock.isDown === "true" ? "▼" : "▲"} {stock.percent}%
+                    </span>
+                </div>
+
             </div>
+
         </div>
+
     );
 }

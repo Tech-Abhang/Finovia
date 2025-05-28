@@ -1,4 +1,5 @@
 import React from 'react'
+import { watchList } from '../data/Data'
 
 const WatchList = () => {
   return (
@@ -14,12 +15,63 @@ const WatchList = () => {
             </div>
         </div>
 
-        <input 
-            className="w-full p-2 border-b"
-            placeholder='Search for stocks, indices, mutual funds...'
-        />
+        {/* Search Box */}
+        <div className="px-3 py-2 border-b">
+            <div className="relative">
+                <input 
+                    className="w-full p-2 pl-8 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
+                    placeholder='Search for stocks, indices, mutual funds...'
+                />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 absolute left-2 top-2.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+        </div>
+
+        {/* Watchlist Header */}
+        <div className="px-4 py-3 border-b bg-gray-50">
+            <h3 className="font-semibold text-gray-800 flex items-center">
+                <span>My Watchlist</span>
+                <span className="ml-2 bg-gray-200 text-xs px-2 py-0.5 rounded-full">{watchList.length}</span>
+            </h3>
+        </div>
+
+        {/* Watchlist Items */}
+        <div className="flex-1 overflow-y-auto">
+            {watchList.map((item, index) => (
+                <div key={index} className='w-full flex items-center justify-between px-4 py-3 border-b hover:bg-gray-50 transition-colors duration-150 relative'>
+                    <WatchListItem stock={item} />
+                </div>
+            ))}
+        </div>
     </div>
   )
 }
 
 export default WatchList
+
+const WatchListItem = ({ stock }) => {
+    const [WatchlistActions , setWatchlistActions] = React.useState(false);
+    const mouseEntry = () => {
+        setWatchlistActions(true);
+    }
+    const mouseLeave = () => {
+        setWatchlistActions(false);
+    }
+
+    return (
+        <div onMouseEnter={mouseEntry} onMouseLeave={mouseLeave} className='flex justify-between w-full items-center'>
+            <div className="flex items-center">
+                <div className="pl-3">
+                    <p className="font-medium text-gray-800">{stock.name}</p>
+                </div> 
+            </div>
+            <div className="flex flex-col items-end">
+                <span className="font-light text-gray-900">₹{stock.price}</span>
+                <span className={stock.isDown === "true" ? "text-red-500 text-sm" : "text-green-500 text-sm"}>
+                    {stock.isDown === "true" ? "▼" : "▲"} {stock.percent}%
+                </span>
+            </div>
+        </div>
+    );
+}

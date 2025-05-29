@@ -6,7 +6,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../components/ui/ToolTip"
+} from "./ui/ToolTip"
 
 const WatchList = () => {
   return (

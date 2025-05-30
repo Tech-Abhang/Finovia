@@ -140,16 +140,11 @@ app.get("/allPositions", async(req,res)=>{
 });
 
 app.post("/newOrder",(req, res) => {
-    const { product, name, qty, avg, price, net, day, isLoss } = req.body;
     const newOrder = new OrdersModel({
-        product,
-        name,
-        qty,
-        avg,
-        price,
-        net,
-        day,
-        isLoss
+        name: req.body.name,
+        qty: req.body.qty,
+        price: req.body.price,
+        mode: req.body.mode,
     });
 
     newOrder.save()

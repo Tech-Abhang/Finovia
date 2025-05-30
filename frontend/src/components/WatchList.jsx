@@ -1,5 +1,6 @@
-import React from 'react'
+import React , {useState }from 'react'
 import { watchList } from '../data/Data'
+import BuyActionWindow from './BuyActionWindow'
 
 import {
   Tooltip,
@@ -51,7 +52,6 @@ const WatchList = () => {
                 </div>
             ))}
         </div>
-
     </div>
   )
 }
@@ -67,13 +67,15 @@ const WatchListItem = ({ stock }) => {
         setWatchlistActions(false);
     }
 
+    const [showComponent, setShowComponent] = useState(false);
+
     const WatchListActionTooltip = ({ uid }) => { 
         return (
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
                 <div className="flex flex-row items-center">
-                  <button className='bg-blue-500 text-white p-2 mr-1 h-[36px] w-[56px] rounded-2xl'>Buy</button>
+                  <button className='bg-blue-500 text-white p-2 mr-1 h-[36px] w-[56px] rounded-2xl' onClick={() => setShowComponent(true)}>Buy</button>
                   <button className='bg-red-500 text-white p-2 ml-1 h-[36px] w-[56px] rounded-2xl'>Sell</button>
                   <button className='bg-white p-2 ml-1 h-[36px] w-[56px] border rounded-2xl'>...</button>
                 </div>
@@ -94,6 +96,11 @@ const WatchListItem = ({ stock }) => {
 
             <div className='flex items-center justify-between '>
                 {WatchlistActions && <WatchListActionTooltip uid={stock.name} />}
+                {showComponent && (
+                    <div className="fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 ">
+                        <BuyActionWindow onCancel={() => setShowComponent(false)}/>
+                    </div>
+                )}
                 <div className='pl-3 flex flex-col items-end'>
                     <span className="font-light text-gray-900">₹{stock.price}</span>
                     <span className={stock.isDown === "true" ? "text-red-500 text-sm" : "text-green-500 text-sm"}>

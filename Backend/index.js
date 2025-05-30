@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const { HoldingsModel } = require('./models/HoldingsModel');
 const { PositionsModel } = require('./models/PositionModel');
+const { OrdersModel } = require('./models/OrderModel');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 app.use(cors());
@@ -137,3 +138,26 @@ app.get("/allPositions", async(req,res)=>{
         console.error('Error fetching positions:', error);
     }
 });
+
+app.post("/newOrder",(req, res) => {
+    const { product, name, qty, avg, price, net, day, isLoss } = req.body;
+    const newOrder = new OrdersModel({
+        product,
+        name,
+        qty,
+        avg,
+        price,
+        net,
+        day,
+        isLoss
+    });
+
+    newOrder.save()
+        .then(() => {
+            res.status(201).json({ message: 'Order created successfully' });
+        })
+        .catch((err) => {
+            console.error('Error creating order:', err);
+            res.status(500).json({ error: 'Failed to create order' });
+        });
+})

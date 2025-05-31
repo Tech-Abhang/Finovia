@@ -129,6 +129,16 @@ app.get('/allHoldings', async (req, res) => {
     }
 });
 
+app.get("/allOrders",async(req,res)=>{
+    try{
+        const orders = await OrdersModel.find();
+        res.json(orders);
+    }
+    catch(error){
+        console.error('Error fetching orders:', error);
+    }
+})
+
 app.get("/allPositions", async(req,res)=>{
     try{
         const positions = await PositionsModel.find();

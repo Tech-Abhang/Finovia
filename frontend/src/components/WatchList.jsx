@@ -8,6 +8,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/ToolTip"
+import SellActionWindow from './SellActionWindow'
 
 const WatchList = () => {
   return (
@@ -67,7 +68,8 @@ const WatchListItem = ({ stock }) => {
         setWatchlistActions(false);
     }
 
-    const [showComponent, setShowComponent] = useState(false);
+    const [showBuyComponent, setShowBuyComponent] = useState(false);
+    const [showSellComponent, setShowSellComponent] = useState(false);
 
     const WatchListActionTooltip = ({ uid }) => { 
         return (
@@ -75,8 +77,8 @@ const WatchListItem = ({ stock }) => {
             <Tooltip>
               <TooltipTrigger>
                 <div className="flex flex-row items-center">
-                  <button className='bg-blue-500 text-white p-2 mr-1 h-[36px] w-[56px] rounded-2xl' onClick={() => setShowComponent(true)}>Buy</button>
-                  <button className='bg-red-500 text-white p-2 ml-1 h-[36px] w-[56px] rounded-2xl'>Sell</button>
+                  <button className='bg-blue-500 text-white p-2 mr-1 h-[36px] w-[56px] rounded-2xl' onClick={() => setShowBuyComponent(true)}>Buy</button>
+                  <button className='bg-red-500 text-white p-2 ml-1 h-[36px] w-[56px] rounded-2xl'  onClick={() => setShowSellComponent(true)}>Sell</button>
                   <button className='bg-white p-2 ml-1 h-[36px] w-[56px] border rounded-2xl'>...</button>
                 </div>
               </TooltipTrigger>
@@ -96,9 +98,14 @@ const WatchListItem = ({ stock }) => {
 
             <div className='flex items-center justify-between '>
                 {WatchlistActions && <WatchListActionTooltip uid={stock.name} />}
-                {showComponent && (
+                {showBuyComponent && (
                     <div className="fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 ">
-                        <BuyActionWindow onCancel={() => setShowComponent(false)} uid={stock.name} />
+                        <BuyActionWindow onCancel={() => setShowBuyComponent(false)} uid={stock.name} />
+                    </div>
+                )}
+                {showSellComponent && (
+                    <div className="fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 ">
+                        <SellActionWindow onCancel={() => setShowSellComponent(false)} uid={stock.name} />
                     </div>
                 )}
                 <div className='pl-3 flex flex-col items-end'>

@@ -1,2 +1,4 @@
 .env
 best_pattern_model.h5
+enhanced_data/
+**/enhanced_data/

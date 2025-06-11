@@ -1,9 +1,16 @@
+# Python virtual environments
+env/
+venv/
+.venv/
+
+# Python environment files
 .env
-best_pattern_model.h5
+
+# Model files
 *.h5
+best_pattern_model.h5
+
+# Ignored folders (data, models, etc.)
 enhanced_data/
-**/enhanced_data/
 bullish/
 bearish/
-**/bullish/
-**/bearish/

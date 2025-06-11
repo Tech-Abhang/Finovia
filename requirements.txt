@@ -1,0 +1,7 @@
+opencv-python
+pytesseract
+dotenv
+requests
+torch
+mplfinance
+pandas

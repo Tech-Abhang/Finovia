@@ -1,4 +1,9 @@
 .env
 best_pattern_model.h5
+*.h5
 enhanced_data/
 **/enhanced_data/
+bullish/
+bearish/
+**/bullish/
+**/bearish/

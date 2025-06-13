@@ -5,3 +5,4 @@ requests
 torch
 mplfinance
 pandas
+requests

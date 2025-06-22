@@ -1,8 +1,36 @@
-opencv-python
-pytesseract
-dotenv
-requests
-torch
-mplfinance
+# Core web framework
+flask
+werkzeug
+
+# ML and data processing
+tensorflow
+numpy
 pandas
+pillow
+keras
+huggingface_hub
+
+# Financial data
+yfinance
+curl_cffi
+beautifulsoup4
+frozendict
+peewee
+websockets
+multitasking
+
+# LLM and AI
+langchain
+langchain-openai
+langchain-ollama
+langchain-core
+langchain-community
+langchain-huggingface
+
+
+# Utilities
 requests
+python-dotenv
+pytesseract
+tiktoken
+tabulate
